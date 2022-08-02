@@ -12,6 +12,26 @@ option go_package = "../internal/pkg/ba_proto;ba_proto";
 option csharp_namespace = "Google.Protobuf.ba_proto";
 
 /**
+ * Position in the global map (WGS84)
+ */
+message Position {
+    /**
+     * WGS84 latitude,
+     */
+    double latitude = 1;
+
+    /**
+     * WGS84 longitude
+     */
+    double longitude = 2;
+
+    /**
+     * altitude in [m]
+     */
+    double altitude = 3;
+  }
+
+/**
  * Car status information.
  * From Client to Server only
  */
@@ -38,23 +58,6 @@ message CarStatus {
      * Car position in the global map (WGS84)
      */
     Position position = 3;
-  }
-
-  message Position {
-    /**
-     * WGS84 latitude,
-     */
-    double latitude = 1;
-
-    /**
-     * WGS84 longitude
-     */
-    double longitude = 2;
-
-    /**
-     * altitude in [m]
-     */
-    double altitude = 3;
   }
 
   /**
@@ -106,7 +109,7 @@ message CarStatus {
   State state = 2;
 
   /**
-   * Name of the stop as specified in CarCommand::stops.
+   * Name and position of the stop as specified in CarCommand::stops.
    * OPTIONAL
    */
   Stop stop = 3;
@@ -164,5 +167,10 @@ message Stop {
    * The name of the stop where to go.
    */
   string to = 1;
+
+  /**
+   * Stop position in the global map (WGS84)
+   */
+  Position position = 2;
 
 }
